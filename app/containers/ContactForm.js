@@ -3,8 +3,14 @@ import { EmailForm } from '../components/EmailForm';
 import { TextAreaForm } from '../components/TextAreaForm';
 import { TextForm } from '../components/TextForm';
 import Axios from 'axios';
+import Recaptcha from 'react-google-recaptcha';
 
 const maxCharacterCount = 250;
+
+var callback = function()
+{
+  console.log('testing/working');
+};
 
 export class ContactForm extends React.Component
 {
@@ -16,6 +22,7 @@ export class ContactForm extends React.Component
     valid:{email: true, name: true, message: true, captcha: false}, note:(0 + '/' + maxCharacterCount)});
     this.handleInput = this.handleInput.bind(this);
     this.sendEmail = this.sendEmail.bind(this);
+    this.verifyCallback = this.verifyCallback.bind(this);
   }
 
   // pass the form information to the
@@ -65,18 +72,24 @@ export class ContactForm extends React.Component
 
   sendEmail(e)
   {
-    if(this.state.valid.email === true || this.state.valid.name === true || this.state.valid.message)
+
+    if(this.state.valid.email === true || this.state.valid.name === true || this.state.valid.message  === true)
     {
       Axios.post('/email',
       {
         email: this.state.values.email,
         name: this.state.values.name,
-        message: this.state.values.message
+        message: this.state.values.message,
+	g_recaptcha_response: this.state.g_recaptcha_response
       })
       .then(function (response)
       {
         console.log(response);
-        alert('Thank you for contacting me! Your email has been sent, expect a reply in the coming days');
+	if(response.status != 200)
+          alert('Thank you for contacting me! Your email has been sent, expect a reply in the coming days');
+      	
+	else
+	  alert("this part of the website is still under construction");   
       })
       .catch(function (error)
       {
@@ -86,9 +99,14 @@ export class ContactForm extends React.Component
     }
   }
 
-  captchaValidation(option)
+  verifyCallback(res)
   {
-    alert(working);
+    this.setState({'g_recaptcha_response': res});
+  }
+
+  loadCallback()
+  {
+    alert('starting');
   }
 
   /*
@@ -118,6 +136,10 @@ export class ContactForm extends React.Component
         <TextForm error={this.state.error.name} inputHandler={this.handleInput} label='Name'/>
         <TextAreaForm error={this.state.error.message} inputHandler={this.handleInput} note={this.state.note} label='Message'/>
         <button onClick={this.sendEmail}>Submit</button>
+	<Recaptcha
+	  ref="recaptcha"
+	  sitekey='6LdOpy0UAAAAAOgDQS9TUl7RuS5YhErxpGvmek-P'
+	  onChange={this.verifyCallback} />
       </div>
 
     );

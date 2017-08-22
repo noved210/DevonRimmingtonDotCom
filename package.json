@@ -27,12 +27,17 @@
     "ejs": "^2.5.7",
     "express": "^4.15.4",
     "node-jsx": "^0.13.3",
+    "node-ses": "^2.0.5",
     "nodemailer": "^4.0.1",
     "react": "^15.6.1",
+    "react-async-script": "^0.9.1",
+    "react-captcha": "^2.0.9",
     "react-dom": "^15.6.1",
+    "react-google-recaptcha": "^0.9.7",
     "react-recaptcha": "^2.3.3",
     "react-router": "^4.1.2",
-    "react-tools": "^0.13.3"
+    "react-tools": "^0.13.3",
+    "request": "^2.81.0"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",

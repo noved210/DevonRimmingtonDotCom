@@ -12,8 +12,11 @@ export class Resume extends React.Component
   render()
   {
     return (
-      <iframe src={this.props.src} frameBorder={this.props.frameBorder} style={ ResumeStyle }>
-      </iframe>
+      <div id='resume'>
+        <h2 style={{padding: '50px 15px 15px'}}>Resume</h2>
+        <iframe src={this.props.src} frameBorder={this.props.frameBorder} style={ ResumeStyle }>
+        </iframe>
+      </div>
     );
   }
 }

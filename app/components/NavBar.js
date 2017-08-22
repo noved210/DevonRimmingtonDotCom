@@ -47,7 +47,7 @@ export class NavBar extends React.Component
 
           <ul className='nav navbar-nav'>
             <li><Link link={bio.link} target={bio.target} text={bio.text} /></li>
-            <li><Link link={work.link} target={work.target} text={work.text} /></li>
+	    <li><Link link={'#resume'} target={bio.target} text='Resume' /></li>
             <li><Link link={contact.link} target={contact.target} text={contact.text} /></li>
           </ul>
         </div>

@@ -21,9 +21,7 @@ export class App extends React.Component
         <h1 style={{textAlign:'center'}}>{this.props.title}</h1>
         <ImageHolder />
         <Bio />
-        <Work />
         <Resume src='media/Resume.pdf' frameBorder={1} />
-        <ContactForm  style={{paddingTop:'60'}} />
         <Footer />
       </div>
       </div>
